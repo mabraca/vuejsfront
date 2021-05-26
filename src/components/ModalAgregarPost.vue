@@ -127,24 +127,18 @@
         await this.$store.dispatch("profile/me")
         let userd = await this.$store.getters["profile/me"];
         this.user = userd.id;
-        console.log("USer");
-        console.log(userd);
       },
       async sendData() {
           try {
               await this.$store.dispatch("profile/me")
               let userd = await this.$store.getters["profile/me"];
-              console.log("Data request");
               let data={
                 user: userd.id,
                 title: this.title,
                 content: this.content,
                 status:this.status,
               }
-              console.log(data)
               await this.$store.dispatch("post/add",data);
-              console.log("response");
-              console.log(this.$store.state.post.post); 
               await this.$store.dispatch("alerts/error", "Post enviado exitosamente");
               this.$refs['post_form'].reset();
               this.$emit('updateTable');
@@ -152,7 +146,6 @@
               
           } catch (e) {
               await this.$store.dispatch("alerts/error", "Error en obtener los datos");
-              console.log(e);
           }
         }
     },

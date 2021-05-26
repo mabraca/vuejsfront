@@ -149,7 +149,6 @@
               
           } catch (e) {
               await this.$store.dispatch("alerts/error", "Error en obtener los datos");
-              console.log(e);
           }
         }
     },

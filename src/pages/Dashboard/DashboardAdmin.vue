@@ -196,7 +196,6 @@ export default {
             try {
                 await this.$store.dispatch("post/getPostAdmin");
                 this.table = this.$store.state.post.list;
-                console.log(this.$store.state.post.list);
                 this.total = this.table.length;
                 for(let i = 0; i < this.table.length; i++){
                    this.table[i].created_at= new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(this.table[i].created_at)))
@@ -205,7 +204,6 @@ export default {
                 }
             } catch (e) {
                 await this.$store.dispatch("alerts/error", "Error en obtener los datos");
-                console.log(e);
             }
         },
         async deletePost(id) {
@@ -215,7 +213,6 @@ export default {
                 this.getList();
             } catch (e) {
                 await this.$store.dispatch("alerts/error", "Error en obtener los datos");
-                console.log(e);
             }
         },
 
@@ -232,8 +229,6 @@ export default {
         showModalEditar(item) {
             this.isModalEditarVisible = true;
             this.objectToPass = item;
-            console.log("Item parent");
-            console.log(item);
         },
         closeModalEditar() {
             this.isModalEditarVisible = false;
@@ -247,13 +242,9 @@ export default {
                 confirmButtonText: `Eliminar`,
                 denyButtonText: `Cerrar`,
             }).then((result) => {
-                console.log(result)
                 /* Read more about isConfirmed, isDenied below */
                 if (result.value) {
-                    console.log("Confirmado");
                     this.deletePost(item.id);
-                } else  {
-                    console.log("Cancelado");
                 }
             });
 

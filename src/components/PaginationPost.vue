@@ -11,8 +11,8 @@
     <li
       class="page-item"
       v-for="item in range(minPage, maxPage)"
-      :key="item.id"
-      :class="{ active: value === item.id }"
+      :key="item"
+      :class="{ active: value === item }"
     >
       <a class="page-link" @click="changePage(item)">{{ item }}</a>
     </li>
@@ -52,7 +52,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 10
+      default: 5
     },
     total: {
       type: Number,
@@ -75,7 +75,6 @@ export default {
       return 1;
     },
     pagesToDisplay() {
-        
       if (this.totalPages > 0 && this.totalPages < this.defaultPagesToDisplay) {
         return this.totalPages;
       }

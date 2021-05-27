@@ -108,7 +108,6 @@
             v-model="pagination.currentPage"
             :per-page="pagination.perPage"
             :total="total"
-            value=1
           />
         </md-card-actions>
       </md-card>
@@ -151,8 +150,8 @@ export default {
         query: null,
 
         sortation: {
-            field: "created_at",
-            order: "asc",
+            field: null,
+            order: null,
         },
         pagination: {
             perPage: 5,
@@ -180,10 +179,12 @@ export default {
         },
 
         to() {
+            
             let highBound = this.from + this.pagination.perPage;
             if (this.total < highBound) {
                 highBound = this.total;
             }
+
             return highBound;
         },
     },

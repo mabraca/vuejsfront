@@ -34,29 +34,29 @@
                     <ValidationProvider rules="min:3|max:15" v-slot="{ errors }">
                       <md-field class="md-invalid">
                         <label>Titulo</label>
-                          <md-input v-model="item.title" type="text" maxlength="15" :value="item.title"/>
+                          <md-input v-if="item!=null" v-model="item.title" type="text" maxlength="15" :value="item.title"/>
                       </md-field>
                       <span>{{ errors[0] }}</span>
                     </ValidationProvider>
                      <ValidationProvider rules="min:3|max:15" v-slot="{ errors }">
                       <md-field class="md-invalid" rules="min:3|max:100">
                         <label>Contenido</label>
-                        <md-textarea v-model="item.content" type="text" :value="item.content"/>
+                        <md-textarea v-if="item!=null" v-model="item.content" type="text" :value="item.content"/>
                       </md-field>
                       <span>{{ errors[0] }}</span>
                      </ValidationProvider>
                     <md-field class="md-invalid">
                       <label>Status</label>
-                      <md-select v-model="item.statusId" name="estatus" :value="item.statusId">
-                      <md-option
-                        v-for="itemT in statusOptions"
-                        :key="itemT.id"
-                        :label="itemT.name"
-                        :value="itemT.id"
-                      >
-                        {{ itemT.name }}
-                      </md-option>
-                    </md-select>
+                      <md-select v-if="item!=null" v-model="item.statusId" name="estatus" :value="item.statusId">
+                        <md-option
+                          v-for="itemT in statusOptions"
+                          :key="itemT.id"
+                          :label="itemT.name"
+                          :value="itemT.id"
+                        >
+                          {{ itemT.name }}
+                        </md-option>
+                      </md-select>
                     </md-field>
                   </div>
                 </div>
@@ -111,7 +111,7 @@
     components: {ValidationProvider},
     name: 'Modal',
     props: {
-      item : {Object}
+      item : Object
     },
     data: () => ({
       user: null,
@@ -121,13 +121,6 @@
     methods: {
       close() {
         this.$emit('close');
-      },
-      created(){
-      },
-      async  getUser(){
-        await this.$store.dispatch("profile/me")
-        let userd = await this.$store.getters["profile/me"];
-        this.user = userd.id;
       },
       async sendData() {
           try {

@@ -29,9 +29,13 @@
                 <md-icon>fingerprint</md-icon>
                 Iniciar Sesion
               </md-list-item>
+              <md-list-item href="/" @click="linkClick" v-if="$store.getters['isAuthenticated']">
+                <md-icon>account_circle</md-icon>
+                Ir a home
+              </md-list-item>
               <md-list-item @click="logout()" v-if="$store.getters['isAuthenticated']">
                 <md-icon>account_circle</md-icon>
-                Cerrar sesion
+                Cerrar sesión
               </md-list-item>
             </md-list>
           </div>

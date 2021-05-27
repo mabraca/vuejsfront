@@ -131,22 +131,27 @@
       },
       async sendData() {
           try {
-              await this.$store.dispatch("profile/me")
-              let userd = await this.$store.getters["profile/me"];
-              let data={
-                user: userd.id,
-                title: this.item.title,
-                content: this.item.content,
-                status:this.item.statusId,
-                id: this.item.id
-              }
+            if(this.item.title != null && this.item.content != null && this.item.title.length > 3 && this.item.content.length > 3){
+                await this.$store.dispatch("profile/me")
+                let userd = await this.$store.getters["profile/me"];
+                let data={
+                  user: userd.id,
+                  title: this.item.title,
+                  content: this.item.content,
+                  status:this.item.statusId,
+                  id: this.item.id
+                }
 
-              await this.$store.dispatch("post/update",data);
-              await this.$store.dispatch("alerts/success", "Post enviado exitosamente");
-              this.$refs['post_form'].reset();
-              this.$emit('updateTable');
-              this.$emit('close');
-              
+                await this.$store.dispatch("post/update",data);
+                await this.$store.dispatch("alerts/success", "Post enviado exitosamente");
+                this.$refs['post_form'].reset();
+                this.$emit('updateTable');
+                this.$emit('close');
+
+            }else{
+              await this.$store.dispatch("alerts/error", "Debes llenar todos los campos correctamente");
+            }
+
           } catch (e) {
               await this.$store.dispatch("alerts/error", "Error en obtener los datos");
           }

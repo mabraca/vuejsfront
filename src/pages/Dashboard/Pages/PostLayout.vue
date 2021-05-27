@@ -29,6 +29,14 @@
                 <md-icon>fingerprint</md-icon>
                 Iniciar Sesion
               </md-list-item>
+              <md-list-item href="/dashboard" @click="linkClick" v-if="$store.getters['isAuthenticated']">
+                <md-icon>airplay</md-icon>
+                Ir a dashboard
+              </md-list-item>
+              <md-list-item @click="logout()"  v-if="$store.getters['isAuthenticated']">
+                <md-icon>account_circle</md-icon>
+                Cerrar sesión
+              </md-list-item>
             </md-list>
           </div>
         </div>
@@ -129,6 +137,9 @@ export default {
       } else {
         this.responsive = false;
       }
+    },
+    logout() {
+      this.$store.dispatch("logout");
     }
   },
   mounted() {

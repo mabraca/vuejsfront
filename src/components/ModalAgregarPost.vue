@@ -108,6 +108,7 @@
  
 
   export default {
+    
     components: {ValidationProvider},
     name: 'Modal',
     data: () => ({
@@ -116,6 +117,7 @@
       content: null,
       statusOptions: [{id: 1,name: "Publicar"} , {id: 3, name:"Borrador"}, {id: 2, name:"Inactivo"}],
       status:1,
+      statusId:null
     }),
     methods: {
       close() {
@@ -129,7 +131,9 @@
         this.user = userd.id;
       },
       async sendData() {
+  
           try {
+            if(this.title != null && this.content != null && this.title.length > 3 && this.content.length > 3){
               await this.$store.dispatch("profile/me")
               let userd = await this.$store.getters["profile/me"];
               let data={
@@ -143,6 +147,9 @@
               this.$refs['post_form'].reset();
               this.$emit('updateTable');
               this.$emit('close');
+            }else{
+              await this.$store.dispatch("alerts/error", "Debes llenar todos los campos correctamente");
+            }
               
           } catch (e) {
               await this.$store.dispatch("alerts/error", "Error en obtener los datos");

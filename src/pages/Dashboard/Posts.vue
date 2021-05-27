@@ -41,7 +41,9 @@
 
 <script>
   export default {
-
+    created() {
+      this.getData();
+    },
     data() {
         return{
             data:null,

@@ -108,6 +108,7 @@
             v-model="pagination.currentPage"
             :per-page="pagination.perPage"
             :total="total"
+            value=1
           />
         </md-card-actions>
       </md-card>
@@ -145,7 +146,7 @@ export default {
 
     data: () => ({
         table: [],
-        footerTable: ["Titulo", "Contenido", "Estatus", "Creado","Acciones"],
+        footerTable: ["Titulo", "Contenido", "Estatus", "Creado","Actualizado","Acciones"],
         user : null,
         query: null,
 

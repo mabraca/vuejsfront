@@ -124,6 +124,8 @@ export default {
       this.$emit("input", item);
     },
     nextPage() {
+      console.log(this.value);
+      console.log(this.totalPages)
       if (this.value < this.totalPages) {
         this.$emit("input", this.value + 1);
       }
